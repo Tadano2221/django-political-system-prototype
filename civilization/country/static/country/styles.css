@@ -1,0 +1,1184 @@
+@import url(
+    "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@400;500;600;700&display=swap"
+);
+
+:root {
+    --black: #080a0d;
+    --near-black: #0d1117;
+    --navy: #101926;
+    --steel: #1c2733;
+    --steel-light: #2b3947;
+    --gold: #b99a52;
+    --gold-light: #d8bf7b;
+    --cream: #eee9dc;
+    --paper: #f4f1e9;
+    --white: #ffffff;
+    --muted: #a7afb8;
+    --border: rgba(185, 154, 82, 0.28);
+    --red: #7c2424;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background: var(--paper);
+    color: #161a1f;
+    font-family: "Inter", sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+.directorate-container {
+    padding-left: clamp(22px, 5vw, 78px);
+    padding-right: clamp(22px, 5vw, 78px);
+}
+
+.page-shell {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
+/* Header */
+
+.main-header {
+    background: var(--black);
+    border-bottom: 1px solid var(--border);
+}
+
+.header-content {
+    min-height: 86px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.system-brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    color: var(--cream);
+}
+
+.system-brand:hover {
+    color: var(--cream);
+}
+
+.system-emblem {
+    width: 46px;
+    height: 46px;
+    border: 1px solid var(--gold);
+    display: grid;
+    place-items: center;
+    color: var(--gold-light);
+    font-family: "Oswald", sans-serif;
+    font-size: 25px;
+    font-weight: 700;
+}
+
+.system-name {
+    font-family: "Oswald", sans-serif;
+    font-size: 20px;
+    letter-spacing: 0.18em;
+    line-height: 1;
+}
+
+.system-subtitle {
+    margin-top: 7px;
+    color: var(--muted);
+    font-size: 9px;
+    letter-spacing: 0.24em;
+}
+
+.header-navigation {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.header-navigation a {
+    color: #c5cad0;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.header-navigation a:hover {
+    color: var(--gold-light);
+}
+
+.header-navigation i {
+    margin-right: 6px;
+}
+
+.system-view-link {
+    color: var(--gold-light) !important;
+}
+
+.status-line {
+    background: var(--navy);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    color: #88929d;
+    font-family: "Oswald", sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+}
+
+.status-line .directorate-container {
+    min-height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.status-line strong {
+    color: var(--gold-light);
+    margin-left: 7px;
+}
+
+/* Registry */
+
+.registry-body {
+    background: var(--near-black);
+}
+
+.registry-hero {
+    padding: 90px 0 55px;
+    background:
+        linear-gradient(
+            90deg,
+            rgba(8, 10, 13, 0.98),
+            rgba(16, 25, 38, 0.92)
+        ),
+        repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 79px,
+            rgba(185, 154, 82, 0.05) 80px
+        );
+    border-bottom: 1px solid var(--border);
+}
+
+.classification {
+    color: var(--gold);
+    font-family: "Oswald", sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    margin-bottom: 20px;
+}
+
+.registry-hero h1 {
+    max-width: 760px;
+    margin: 0;
+    color: var(--cream);
+    font-family: "Oswald", sans-serif;
+    font-size: clamp(48px, 7vw, 92px);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 0.96;
+}
+
+.registry-hero h1 span {
+    display: block;
+    color: var(--gold-light);
+}
+
+.registry-hero p {
+    color: var(--muted);
+    margin: 28px 0 0;
+    font-size: 16px;
+}
+
+.registry-count {
+    border-left: 1px solid var(--gold);
+    display: inline-flex;
+    flex-direction: column;
+    padding-left: 22px;
+    text-align: left;
+}
+
+.registry-count strong {
+    color: var(--cream);
+    font-family: "Oswald", sans-serif;
+    font-size: 54px;
+    font-weight: 500;
+    line-height: 1;
+}
+
+.registry-count span {
+    color: var(--gold);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+}
+
+.country-registry {
+    background: var(--near-black);
+    padding: 55px 0 100px;
+}
+
+.country-card {
+    min-height: 390px;
+    height: 100%;
+    background: #111720;
+    border: 1px solid rgba(185, 154, 82, 0.2);
+    color: var(--cream);
+    display: flex;
+    flex-direction: column;
+    transition: 180ms ease;
+}
+
+.country-card:hover {
+    border-color: var(--gold);
+    color: var(--cream);
+    transform: translateY(-5px);
+}
+
+.country-card-top {
+    display: flex;
+    justify-content: space-between;
+    padding: 18px 22px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.country-code,
+.access-indicator {
+    color: var(--muted);
+    font-family: "Oswald", sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+}
+
+.access-indicator i {
+    color: var(--gold);
+    margin-left: 7px;
+}
+
+.country-card-body {
+    flex: 1;
+    padding: 38px 30px;
+}
+
+.country-symbol {
+    width: 65px;
+    height: 65px;
+    border: 1px solid var(--gold);
+    color: var(--gold-light);
+    display: grid;
+    place-items: center;
+    font-family: "Oswald", sans-serif;
+    font-size: 34px;
+    margin-bottom: 38px;
+}
+
+.country-card h2 {
+    color: var(--cream);
+    font-family: "Oswald", sans-serif;
+    font-size: 34px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.country-card p {
+    color: #9fa8b1;
+    font-size: 14px;
+    line-height: 1.75;
+}
+
+.country-card-footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 18px 22px;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+    color: var(--gold-light);
+    font-family: "Oswald", sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.17em;
+}
+
+/* Public country portal */
+
+.country-portal-body {
+    background: var(--paper);
+}
+
+.country-government-header {
+    background: #f8f6ef;
+    border-bottom: 1px solid #d7d1c3;
+    padding: 34px 0;
+}
+
+.government-identity {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+}
+
+.national-seal {
+    width: 78px;
+    height: 78px;
+    background: var(--navy);
+    border: 3px double var(--gold);
+    color: var(--gold-light);
+    display: grid;
+    place-items: center;
+    font-family: "Oswald", sans-serif;
+    font-size: 38px;
+    font-weight: 600;
+}
+
+.official-label {
+    color: #727983;
+    font-family: "Oswald", sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+}
+
+.government-identity h1 {
+    margin: 4px 0 2px;
+    color: var(--navy);
+    font-family: "Oswald", sans-serif;
+    font-size: 40px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.government-identity p {
+    margin: 0;
+    color: #666d74;
+    font-size: 13px;
+}
+
+.country-navigation {
+    background: var(--navy);
+    border-bottom: 3px solid var(--gold);
+}
+
+.country-navigation-links {
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+}
+
+.country-navigation-links a {
+    color: #d6dae0;
+    padding: 18px 25px;
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+    font-family: "Oswald", sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.country-navigation-links a:hover {
+    background: rgba(185, 154, 82, 0.12);
+    color: var(--gold-light);
+}
+
+.official-hero {
+    padding: 65px 0;
+    background:
+        linear-gradient(
+            120deg,
+            #e9e5da 0%,
+            #f8f6ef 65%,
+            #dfd8c8 100%
+        );
+    border-bottom: 1px solid #d4cdbf;
+}
+
+.official-hero-main {
+    min-height: 380px;
+    background: var(--navy);
+    padding: clamp(35px, 5vw, 70px);
+    color: var(--cream);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-left: 5px solid var(--gold);
+}
+
+.official-overline {
+    color: var(--gold-light);
+    font-family: "Oswald", sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    margin-bottom: 20px;
+}
+
+.official-hero-main h2 {
+    font-family: "Oswald", sans-serif;
+    font-size: clamp(42px, 6vw, 70px);
+    font-weight: 500;
+    line-height: 1;
+    text-transform: uppercase;
+}
+
+.official-hero-main p {
+    max-width: 680px;
+    color: #b8c0c8;
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+.official-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 23px;
+}
+
+.official-primary,
+.official-secondary {
+    border-radius: 0;
+    padding: 13px 22px;
+    font-family: "Oswald", sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+}
+
+.official-primary {
+    background: var(--gold);
+    border: 1px solid var(--gold);
+    color: var(--black);
+}
+
+.official-primary:hover {
+    background: var(--gold-light);
+    border-color: var(--gold-light);
+}
+
+.official-secondary {
+    border: 1px solid #697584;
+    color: var(--cream);
+}
+
+.official-secondary:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--cream);
+}
+
+.executive-status-panel {
+    height: 100%;
+    min-height: 380px;
+    background: #f7f4ec;
+    border: 1px solid #cbc3b3;
+    padding: 32px;
+}
+
+.panel-heading {
+    color: #777067;
+    font-family: "Oswald", sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    padding-bottom: 17px;
+    border-bottom: 1px solid #d6cec0;
+}
+
+.status-value {
+    color: var(--navy);
+    font-family: "Oswald", sans-serif;
+    font-size: 36px;
+    margin: 32px 0;
+}
+
+.status-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 14px 0;
+    border-top: 1px solid #ddd6c9;
+    color: #686e74;
+    font-size: 12px;
+}
+
+.status-row strong {
+    color: #2f5c3b;
+    text-transform: uppercase;
+}
+
+.official-section {
+    padding: 80px 0;
+}
+
+.institution-section {
+    background: #e8e3d8;
+}
+
+.official-section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-bottom: 23px;
+    margin-bottom: 35px;
+    border-bottom: 2px solid var(--navy);
+}
+
+.official-section-heading span {
+    color: #7c7469;
+    font-family: "Oswald", sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+}
+
+.official-section-heading h2 {
+    color: var(--navy);
+    font-family: "Oswald", sans-serif;
+    font-size: 38px;
+    text-transform: uppercase;
+    margin: 6px 0 0;
+}
+
+.section-number {
+    color: #b4aa98;
+    font-family: "Oswald", sans-serif;
+    font-size: 42px;
+}
+
+.announcement-card {
+    height: 100%;
+    background: #faf8f2;
+    border: 1px solid #d8d0c1;
+    border-top: 4px solid var(--navy);
+    padding: 30px;
+}
+
+.announcement-meta {
+    display: flex;
+    justify-content: space-between;
+    color: #857d70;
+    font-family: "Oswald", sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+}
+
+.announcement-card h3 {
+    color: var(--navy);
+    font-family: "Oswald", sans-serif;
+    font-size: 27px;
+    margin: 22px 0 13px;
+}
+
+.announcement-card p {
+    color: #626970;
+    font-size: 14px;
+    line-height: 1.75;
+}
+
+.issuing-office {
+    border-top: 1px solid #ddd5c8;
+    margin-top: 24px;
+    padding-top: 16px;
+    color: #7b7469;
+    font-size: 11px;
+}
+
+.issuing-office strong {
+    color: var(--navy);
+}
+
+.public-institution-card {
+    height: 100%;
+    background: #f6f3eb;
+    border: 1px solid #d3cbbc;
+    padding: 28px;
+    transition: 160ms ease;
+}
+
+.public-institution-card:hover {
+    border-color: var(--gold);
+    transform: translateY(-3px);
+}
+
+.institution-index {
+    color: var(--gold);
+    font-family: "Oswald", sans-serif;
+    font-size: 12px;
+}
+
+.public-institution-card h3 {
+    color: var(--navy);
+    font-family: "Oswald", sans-serif;
+    font-size: 25px;
+    margin: 20px 0 12px;
+}
+
+.public-institution-card p {
+    color: #697077;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.institution-public-link {
+    margin-top: 25px;
+    color: var(--navy);
+    font-family: "Oswald", sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.institution-public-link i {
+    float: right;
+    color: var(--gold);
+}
+
+.service-panel {
+    background: var(--navy);
+    color: var(--cream);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 55px;
+    padding: clamp(35px, 5vw, 70px);
+}
+
+.service-label {
+    color: var(--gold-light);
+    font-family: "Oswald", sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+}
+
+.service-panel h2 {
+    font-family: "Oswald", sans-serif;
+    font-size: 40px;
+    text-transform: uppercase;
+    margin: 15px 0;
+}
+
+.service-panel p {
+    color: #b2bbc4;
+}
+
+.service-links {
+    border-top: 1px solid #46515d;
+}
+
+.service-links a {
+    display: flex;
+    justify-content: space-between;
+    color: #dce0e4;
+    border-bottom: 1px solid #46515d;
+    padding: 17px 5px;
+    font-size: 13px;
+}
+
+.service-links a:hover {
+    color: var(--gold-light);
+}
+
+.reveal-section {
+    background: #d8d1c3;
+    padding: 55px 0;
+}
+
+.reveal-panel {
+    background: var(--black);
+    border: 1px solid var(--gold);
+    color: var(--cream);
+    padding: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.reveal-panel span {
+    color: var(--gold);
+    font-family: "Oswald", sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+}
+
+.reveal-panel h2 {
+    font-family: "Oswald", sans-serif;
+    font-size: 30px;
+    margin: 8px 0 0;
+    text-transform: uppercase;
+}
+
+.reveal-button {
+    flex-shrink: 0;
+    background: var(--gold);
+    border-radius: 0;
+    color: var(--black);
+    font-family: "Oswald", sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    padding: 15px 22px;
+    text-transform: uppercase;
+}
+
+/* System view */
+
+.system-body {
+    background: var(--near-black);
+    color: var(--cream);
+}
+
+.system-hero {
+    padding: 70px 0 48px;
+    background:
+        linear-gradient(
+            90deg,
+            rgba(8, 10, 13, 0.98),
+            rgba(16, 25, 38, 0.95)
+        ),
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 39px,
+            rgba(185, 154, 82, 0.04) 40px
+        );
+    border-bottom: 1px solid var(--border);
+}
+
+.system-classification {
+    display: inline-block;
+    border: 1px solid var(--red);
+    color: #d88787;
+    padding: 7px 11px;
+    font-family: "Oswald", sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.21em;
+    margin-bottom: 28px;
+}
+
+.system-hero h1 {
+    color: var(--cream);
+    font-family: "Oswald", sans-serif;
+    font-size: clamp(45px, 6vw, 78px);
+    line-height: 0.96;
+}
+
+.system-hero h1 span {
+    display: block;
+    color: var(--gold-light);
+}
+
+.system-hero p {
+    color: var(--muted);
+    margin-top: 20px;
+}
+
+.surface-button {
+    border: 1px solid var(--gold);
+    border-radius: 0;
+    color: var(--gold-light);
+    font-family: "Oswald", sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.13em;
+    padding: 13px 18px;
+    text-transform: uppercase;
+}
+
+.surface-button:hover {
+    background: var(--gold);
+    color: var(--black);
+}
+
+.architecture-section {
+    padding: 65px 0;
+}
+
+.architecture-layer {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    background: #10161e;
+    border: 1px solid rgba(185, 154, 82, 0.23);
+}
+
+.layer-side {
+    padding: 32px;
+    border-right: 1px solid rgba(185, 154, 82, 0.23);
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.layer-code {
+    color: var(--gold);
+    font-family: "Oswald", sans-serif;
+    font-size: 13px;
+}
+
+.layer-side span {
+    color: var(--gold);
+    font-family: "Oswald", sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+}
+
+.layer-side h2 {
+    color: var(--cream);
+    font-family: "Oswald", sans-serif;
+    font-size: 27px;
+    margin-top: 8px;
+}
+
+.layer-content {
+    padding: 28px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.architecture-node,
+.policy-output {
+    background: #151d27;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 22px;
+}
+
+.node-top {
+    display: flex;
+    justify-content: space-between;
+    color: #77828d;
+    font-family: "Oswald", sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.14em;
+}
+
+.node-top strong {
+    color: var(--gold-light);
+}
+
+.architecture-node h3,
+.policy-output h3 {
+    color: var(--cream);
+    font-family: "Oswald", sans-serif;
+    font-size: 21px;
+    margin: 18px 0 10px;
+}
+
+.architecture-node p,
+.policy-output p {
+    color: #9ba5af;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+.architecture-connector {
+    min-height: 65px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6f7a84;
+    font-family: "Oswald", sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+}
+
+.architecture-connector i {
+    color: var(--gold);
+    font-size: 19px;
+    margin-right: 13px;
+}
+
+.output-status {
+    color: var(--gold);
+    font-family: "Oswald", sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+}
+
+.architecture-empty {
+    color: #707a84;
+    border: 1px dashed #394450;
+    padding: 24px;
+    font-size: 12px;
+}
+
+.policy-process-section {
+    padding: 30px 0 90px;
+}
+
+.system-section-heading {
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 30px;
+    padding-bottom: 22px;
+}
+
+.system-section-heading span {
+    color: var(--gold);
+    font-family: "Oswald", sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.22em;
+}
+
+.system-section-heading h2 {
+    color: var(--cream);
+    font-family: "Oswald", sans-serif;
+    font-size: 36px;
+    margin-top: 8px;
+    text-transform: uppercase;
+}
+
+.policy-pathway {
+    background: #10161e;
+    border: 1px solid rgba(185, 154, 82, 0.23);
+    margin-bottom: 25px;
+}
+
+.policy-pathway-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 28px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.policy-pathway-header span {
+    color: #69737e;
+    font-family: "Oswald", sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.16em;
+}
+
+.policy-pathway-header h3 {
+    color: var(--cream);
+    font-family: "Oswald", sans-serif;
+    font-size: 24px;
+    margin: 6px 0 0;
+}
+
+.policy-status {
+    color: var(--gold-light);
+    border: 1px solid var(--gold);
+    padding: 7px 11px;
+    font-family: "Oswald", sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.14em;
+}
+
+.pathway-grid {
+    display: grid;
+    grid-template-columns:
+        minmax(0, 1fr)
+        35px
+        minmax(0, 1fr)
+        35px
+        minmax(0, 1fr)
+        35px
+        minmax(0, 1fr);
+    align-items: stretch;
+    padding: 24px;
+}
+
+.pathway-stage {
+    background: #151d27;
+    padding: 22px;
+    min-height: 210px;
+}
+
+.stage-label {
+    color: var(--gold);
+    font-family: "Oswald", sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+}
+
+.pathway-stage h4 {
+    color: var(--cream);
+    font-family: "Oswald", sans-serif;
+    font-size: 20px;
+    margin: 15px 0;
+}
+
+.pathway-stage strong {
+    color: var(--gold-light);
+    font-size: 13px;
+}
+
+.pathway-stage p,
+.pathway-stage small {
+    color: #9ca5af;
+    font-size: 11px;
+    line-height: 1.65;
+}
+
+.pathway-arrow {
+    display: grid;
+    place-items: center;
+    color: var(--gold);
+}
+
+.influence-record {
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+    padding-top: 13px;
+    margin-top: 13px;
+}
+
+.influence-record span {
+    display: block;
+    color: #9ea7b1;
+    font-size: 10px;
+    margin: 6px 0;
+}
+
+.strength-bar {
+    height: 4px;
+    background: #303a45;
+    margin: 12px 0 6px;
+}
+
+.strength-fill {
+    height: 100%;
+    background: var(--gold);
+}
+
+.stage-empty {
+    color: #66717c !important;
+}
+
+/* Footer */
+
+.main-footer {
+    background: var(--black);
+    border-top: 1px solid var(--border);
+    padding: 35px 0;
+    color: #737d87;
+}
+
+.footer-grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.main-footer strong {
+    color: var(--gold);
+    font-family: "Oswald", sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+}
+
+.main-footer p {
+    font-size: 11px;
+    margin: 8px 0 0;
+}
+
+.footer-build {
+    font-family: "Oswald", sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+}
+
+.empty-state,
+.official-empty {
+    border: 1px dashed #9b9386;
+    padding: 35px;
+    color: #6c7379;
+}
+
+/* Responsive */
+
+@media (max-width: 1100px) {
+    .layer-content {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .pathway-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .pathway-arrow {
+        transform: rotate(90deg);
+        min-height: 25px;
+    }
+}
+
+@media (max-width: 800px) {
+    .header-content {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 20px 0;
+    }
+
+    .header-navigation {
+        flex-wrap: wrap;
+        gap: 13px;
+    }
+
+    .status-line .directorate-container {
+        align-items: flex-start;
+        flex-direction: column;
+        justify-content: center;
+        gap: 5px;
+        min-height: 55px;
+    }
+
+    .registry-hero {
+        padding-top: 65px;
+    }
+
+    .registry-count {
+        margin-top: 35px;
+    }
+
+    .service-panel {
+        grid-template-columns: 1fr;
+    }
+
+    .reveal-panel {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .architecture-layer {
+        grid-template-columns: 1fr;
+    }
+
+    .layer-side {
+        border-right: 0;
+        border-bottom: 1px solid rgba(185, 154, 82, 0.23);
+    }
+
+    .layer-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 560px) {
+    .government-identity {
+        align-items: flex-start;
+    }
+
+    .national-seal {
+        width: 58px;
+        height: 58px;
+        font-size: 28px;
+    }
+
+    .government-identity h1 {
+        font-size: 29px;
+    }
+
+    .official-hero-main h2 {
+        font-size: 39px;
+    }
+
+    .official-section-heading h2 {
+        font-size: 29px;
+    }
+
+    .footer-grid {
+        flex-direction: column;
+    }
+}

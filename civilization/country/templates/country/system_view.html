@@ -1,0 +1,487 @@
+{% extends "country/layout.html" %}
+
+{% block title %}
+System View | {{ country.name }}
+{% endblock %}
+
+{% block body_class %}
+system-body
+{% endblock %}
+
+{% block header_links %}
+
+<a href="{% url 'public_state' country.id %}">
+    <i class="bi bi-eye-fill"></i>
+    Return to Surface
+</a>
+
+{% endblock %}
+
+{% block content %}
+
+<section class="system-hero">
+    <div class="container-fluid directorate-container">
+
+        <div class="system-classification">
+            RESTRICTED ANALYTICAL VIEW
+        </div>
+
+        <div class="row align-items-end">
+
+            <div class="col-lg-8">
+
+                <h1>
+                    {{ country.name|upper }}
+                    <span>STATE ARCHITECTURE</span>
+                </h1>
+
+                <p>
+                    Complete institutional configuration beneath the
+                    public national interface.
+                </p>
+
+            </div>
+
+            <div class="col-lg-4 text-lg-end">
+
+                <a
+                    href="{% url 'public_state' country.id %}"
+                    class="btn surface-button"
+                >
+                    <i class="bi bi-arrow-left"></i>
+                    Public Interface
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<section class="architecture-section">
+    <div class="container-fluid directorate-container">
+
+        <div class="architecture-layer middleware-layer">
+
+            <div class="layer-side">
+
+                <div class="layer-code">
+                    01
+                </div>
+
+                <div>
+                    <span>MIDDLEWARE</span>
+                    <h2>Influence networks</h2>
+                </div>
+
+            </div>
+
+            <div class="layer-content">
+
+                {% for institution in influence_institutions %}
+
+                    <div class="architecture-node">
+
+                        <div class="node-top">
+
+                            <span>
+                                INFLUENCE
+                            </span>
+
+                            <strong>
+                                {{ institution.authority }}/100
+                            </strong>
+
+                        </div>
+
+                        <h3>
+                            {{ institution.name }}
+                        </h3>
+
+                        <p>
+                            {{ institution.description }}
+                        </p>
+
+                    </div>
+
+                {% empty %}
+
+                    <div class="architecture-empty">
+                        No influence institutions registered.
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+        <div class="architecture-connector">
+            <i class="bi bi-arrow-down"></i>
+            FILTERS AND MODIFIES POLITICAL INPUT
+        </div>
+
+        <div class="architecture-layer view-layer">
+
+            <div class="layer-side">
+
+                <div class="layer-code">
+                    02
+                </div>
+
+                <div>
+                    <span>VIEW</span>
+                    <h2>Decision institutions</h2>
+                </div>
+
+            </div>
+
+            <div class="layer-content">
+
+                {% for institution in decision_institutions %}
+
+                    <div class="architecture-node">
+
+                        <div class="node-top">
+
+                            <span>
+                                AUTHORITY
+                            </span>
+
+                            <strong>
+                                {{ institution.authority }}/100
+                            </strong>
+
+                        </div>
+
+                        <h3>
+                            {{ institution.name }}
+                        </h3>
+
+                        <p>
+                            {{ institution.description }}
+                        </p>
+
+                    </div>
+
+                {% empty %}
+
+                    <div class="architecture-empty">
+                        No decision institutions registered.
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+        <div class="architecture-connector">
+            <i class="bi bi-arrow-down"></i>
+            AUTHORIZES INSTITUTIONAL RESPONSE
+        </div>
+
+        <div class="architecture-layer model-layer">
+
+            <div class="layer-side">
+
+                <div class="layer-code">
+                    03
+                </div>
+
+                <div>
+                    <span>MODEL</span>
+                    <h2>Implementation systems</h2>
+                </div>
+
+            </div>
+
+            <div class="layer-content">
+
+                {% for institution in implementation_institutions %}
+
+                    <div class="architecture-node">
+
+                        <div class="node-top">
+
+                            <span>
+                                CAPACITY
+                            </span>
+
+                            <strong>
+                                {{ institution.capacity }}/100
+                            </strong>
+
+                        </div>
+
+                        <h3>
+                            {{ institution.name }}
+                        </h3>
+
+                        <p>
+                            {{ institution.description }}
+                        </p>
+
+                    </div>
+
+                {% empty %}
+
+                    <div class="architecture-empty">
+                        No implementation institutions registered.
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+        <div class="architecture-connector">
+            <i class="bi bi-arrow-down"></i>
+            PRODUCES PUBLIC POLITICAL OUTPUT
+        </div>
+
+        <div class="architecture-layer template-layer">
+
+            <div class="layer-side">
+
+                <div class="layer-code">
+                    04
+                </div>
+
+                <div>
+                    <span>TEMPLATE</span>
+                    <h2>Visible politics</h2>
+                </div>
+
+            </div>
+
+            <div class="layer-content policy-output-grid">
+
+                {% for policy in policies %}
+
+                    <div class="policy-output">
+
+                        <div class="output-status">
+                            {{ policy.get_status_display|upper }}
+                        </div>
+
+                        <h3>
+                            {{ policy.title }}
+                        </h3>
+
+                        <p>
+                            {{ policy.public_description }}
+                        </p>
+
+                    </div>
+
+                {% empty %}
+
+                    <div class="architecture-empty">
+                        No policy outputs registered.
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<section class="policy-process-section">
+    <div class="container-fluid directorate-container">
+
+        <div class="system-section-heading">
+            <span>INSTITUTIONAL PROCESS RECORDS</span>
+            <h2>Policy pathways</h2>
+        </div>
+
+        {% for policy in policies %}
+
+            <article class="policy-pathway">
+
+                <div class="policy-pathway-header">
+
+                    <div>
+                        <span>
+                            POLICY {{ policy.id|stringformat:"04d" }}
+                        </span>
+
+                        <h3>
+                            {{ policy.title }}
+                        </h3>
+                    </div>
+
+                    <div class="policy-status">
+                        {{ policy.get_status_display|upper }}
+                    </div>
+
+                </div>
+
+                <div class="pathway-grid">
+
+                    <div class="pathway-stage influence-stage">
+
+                        <span class="stage-label">
+                            MIDDLEWARE
+                        </span>
+
+                        <h4>
+                            Influence
+                        </h4>
+
+                        {% for connection in policy.influences.all %}
+
+                            <div class="influence-record">
+
+                                <strong>
+                                    {{ connection.actor.name }}
+                                </strong>
+
+                                <span>
+                                    {{ connection.influence_type }}
+                                </span>
+
+                                <div class="strength-bar">
+                                    <div
+                                        class="strength-fill"
+                                        style="width: {{ connection.influence_strength }}%;"
+                                    ></div>
+                                </div>
+
+                                <small>
+                                    Strength:
+                                    {{ connection.influence_strength }}/100
+                                </small>
+
+                                {% if connection.explanation %}
+                                    <p>
+                                        {{ connection.explanation }}
+                                    </p>
+                                {% endif %}
+
+                            </div>
+
+                        {% empty %}
+
+                            <p class="stage-empty">
+                                No recorded influence.
+                            </p>
+
+                        {% endfor %}
+
+                    </div>
+
+                    <div class="pathway-arrow">
+                        <i class="bi bi-chevron-right"></i>
+                    </div>
+
+                    <div class="pathway-stage decision-stage">
+
+                        <span class="stage-label">
+                            VIEW
+                        </span>
+
+                        <h4>
+                            Authorization
+                        </h4>
+
+                        {% if policy.decision_institution %}
+
+                            <strong>
+                                {{ policy.decision_institution.name }}
+                            </strong>
+
+                            <p>
+                                {{ policy.decision_institution.description }}
+                            </p>
+
+                        {% else %}
+
+                            <p class="stage-empty">
+                                No decision institution assigned.
+                            </p>
+
+                        {% endif %}
+
+                    </div>
+
+                    <div class="pathway-arrow">
+                        <i class="bi bi-chevron-right"></i>
+                    </div>
+
+                    <div class="pathway-stage implementation-stage">
+
+                        <span class="stage-label">
+                            MODEL
+                        </span>
+
+                        <h4>
+                            Implementation
+                        </h4>
+
+                        {% if policy.implementation_institution %}
+
+                            <strong>
+                                {{ policy.implementation_institution.name }}
+                            </strong>
+
+                            <p>
+                                {{ policy.implementation_institution.description }}
+                            </p>
+
+                            <small>
+                                Capacity:
+                                {{ policy.implementation_institution.capacity }}/100
+                            </small>
+
+                        {% else %}
+
+                            <p class="stage-empty">
+                                No implementation institution assigned.
+                            </p>
+
+                        {% endif %}
+
+                    </div>
+
+                    <div class="pathway-arrow">
+                        <i class="bi bi-chevron-right"></i>
+                    </div>
+
+                    <div class="pathway-stage output-stage">
+
+                        <span class="stage-label">
+                            TEMPLATE
+                        </span>
+
+                        <h4>
+                            Public output
+                        </h4>
+
+                        <p>
+                            {{ policy.public_description }}
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+        {% empty %}
+
+            <div class="architecture-empty">
+                No policy pathways registered.
+            </div>
+
+        {% endfor %}
+
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,372 @@
+{% extends "country/layout.html" %}
+
+{% block title %}
+Official Portal | {{ country.name }}
+{% endblock %}
+
+{% block body_class %}
+country-portal-body
+{% endblock %}
+
+{% block header_links %}
+
+<a
+    href="{% url 'system_view' country.id %}"
+    class="system-view-link"
+>
+    <i class="bi bi-diagram-3-fill"></i>
+    Reveal System
+</a>
+
+{% endblock %}
+
+{% block content %}
+
+<section class="country-government-header">
+    <div class="container-fluid directorate-container">
+
+        <div class="government-identity">
+
+            <div class="national-seal">
+                {{ country.name|slice:":1"|upper }}
+            </div>
+
+            <div>
+                <div class="official-label">
+                    OFFICIAL GOVERNMENT PORTAL
+                </div>
+
+                <h1>
+                    {{ country.name }}
+                </h1>
+
+                <p>
+                    National Government Information Service
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<nav class="country-navigation">
+    <div class="container-fluid directorate-container">
+
+        <div class="country-navigation-links">
+
+            <a href="#government">
+                Government
+            </a>
+
+            <a href="#announcements">
+                Announcements
+            </a>
+
+            <a href="#institutions">
+                Institutions
+            </a>
+
+            <a href="#services">
+                Public Services
+            </a>
+
+        </div>
+
+    </div>
+</nav>
+
+<section class="official-hero">
+    <div class="container-fluid directorate-container">
+
+        <div class="row g-4 align-items-stretch">
+
+            <div class="col-lg-8">
+
+                <div class="official-hero-main">
+
+                    <div class="official-overline">
+                        NATIONAL ADMINISTRATION
+                    </div>
+
+                    <h2>
+                        Government of {{ country.name }}
+                    </h2>
+
+                    <p>
+                        {% if country.description %}
+                            {{ country.description }}
+                        {% else %}
+                            Official information concerning national
+                            institutions, government decisions and public
+                            administration.
+                        {% endif %}
+                    </p>
+
+                    <div class="official-actions">
+
+                        <a href="#institutions" class="btn official-primary">
+                            View Government
+                        </a>
+
+                        <a href="#announcements" class="btn official-secondary">
+                            Latest Announcements
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-4">
+
+                <div class="executive-status-panel">
+
+                    <div class="panel-heading">
+                        EXECUTIVE STATUS
+                    </div>
+
+                    <div class="status-value">
+                        OPERATIONAL
+                    </div>
+
+                    <div class="status-row">
+                        <span>Government services</span>
+                        <strong>Active</strong>
+                    </div>
+
+                    <div class="status-row">
+                        <span>National administration</span>
+                        <strong>Active</strong>
+                    </div>
+
+                    <div class="status-row">
+                        <span>Policy registry</span>
+                        <strong>Updated</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<section
+    class="official-section"
+    id="announcements"
+>
+    <div class="container-fluid directorate-container">
+
+        <div class="official-section-heading">
+
+            <div>
+                <span>OFFICIAL COMMUNICATIONS</span>
+                <h2>National announcements</h2>
+            </div>
+
+            <div class="section-number">
+                {{ policies|length|stringformat:"02d" }}
+            </div>
+
+        </div>
+
+        <div class="row g-4">
+
+            {% for policy in policies %}
+
+                <div class="col-lg-6">
+
+                    <article class="announcement-card">
+
+                        <div class="announcement-meta">
+
+                            <span>
+                                {{ policy.get_status_display|upper }}
+                            </span>
+
+                            <span>
+                                POLICY {{ policy.id|stringformat:"04d" }}
+                            </span>
+
+                        </div>
+
+                        <h3>
+                            {{ policy.title }}
+                        </h3>
+
+                        <p>
+                            {{ policy.public_description }}
+                        </p>
+
+                        {% if policy.decision_institution %}
+                            <div class="issuing-office">
+                                Issued by
+                                <strong>
+                                    {{ policy.decision_institution.name }}
+                                </strong>
+                            </div>
+                        {% endif %}
+
+                    </article>
+
+                </div>
+
+            {% empty %}
+
+                <div class="col-12">
+                    <div class="official-empty">
+                        No official announcements are currently published.
+                    </div>
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+</section>
+
+<section
+    class="official-section institution-section"
+    id="institutions"
+>
+    <div class="container-fluid directorate-container">
+
+        <div class="official-section-heading">
+
+            <div>
+                <span>NATIONAL GOVERNMENT</span>
+                <h2>Government institutions</h2>
+            </div>
+
+        </div>
+
+        <div class="row g-4">
+
+            {% for institution in institutions %}
+
+                <div class="col-md-6 col-xl-4">
+
+                    <div class="public-institution-card">
+
+                        <div class="institution-index">
+                            {{ forloop.counter|stringformat:"02d" }}
+                        </div>
+
+                        <h3>
+                            {{ institution.name }}
+                        </h3>
+
+                        <p>
+                            {{ institution.description }}
+                        </p>
+
+                        <div class="institution-public-link">
+                            Official institution
+                            <i class="bi bi-arrow-right"></i>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            {% empty %}
+
+                <div class="col-12">
+                    <div class="official-empty">
+                        No public institutions have been registered.
+                    </div>
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+</section>
+
+<section
+    class="official-section"
+    id="services"
+>
+    <div class="container-fluid directorate-container">
+
+        <div class="service-panel">
+
+            <div>
+                <span class="service-label">
+                    NATIONAL SERVICES
+                </span>
+
+                <h2>
+                    Public administration portal
+                </h2>
+
+                <p>
+                    Access official government information and national
+                    administrative services.
+                </p>
+            </div>
+
+            <div class="service-links">
+
+    <a href="#announcements">
+        Laws and regulations
+        <i class="bi bi-chevron-right"></i>
+    </a>
+
+    <a href="#institutions">
+        Government directory
+        <i class="bi bi-chevron-right"></i>
+    </a>
+
+    <a href="#government">
+        Public information
+        <i class="bi bi-chevron-right"></i>
+    </a>
+
+    <a href="{% url 'system_view' country.id %}">
+        National statistics
+        <i class="bi bi-chevron-right"></i>
+    </a>
+
+</div>
+
+        </div>
+
+    </div>
+</section>
+
+<section class="reveal-section">
+    <div class="container-fluid directorate-container">
+
+        <div class="reveal-panel">
+
+            <div>
+                <span>
+                    RESEARCH ACCESS
+                </span>
+
+                <h2>
+                    Reveal the underlying state system
+                </h2>
+            </div>
+
+            <a
+                href="{% url 'system_view' country.id %}"
+                class="btn reveal-button"
+            >
+                Enter System View
+                <i class="bi bi-arrow-right"></i>
+            </a>
+
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

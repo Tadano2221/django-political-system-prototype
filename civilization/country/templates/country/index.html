@@ -1,0 +1,130 @@
+{% extends "country/layout.html" %}
+
+{% block title %}
+Select State | Directorate Registry
+{% endblock %}
+
+{% block body_class %}
+registry-body
+{% endblock %}
+
+{% block content %}
+
+<section class="registry-hero">
+    <div class="container-fluid directorate-container">
+
+        <div class="row align-items-end">
+
+            <div class="col-lg-8">
+
+                <div class="classification">
+                    COMPARATIVE STATE DATABASE
+                </div>
+
+                <h1>
+                    SELECT A
+                    <span>POLITICAL SYSTEM</span>
+                </h1>
+
+                <p>
+                    Access the public institutional interface of a state.
+                </p>
+
+            </div>
+
+            <div class="col-lg-4 text-lg-end">
+                <div class="registry-count">
+                    <strong>{{ countries|length }}</strong>
+                    <span>REGISTERED STATES</span>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<section class="country-registry">
+    <div class="container-fluid directorate-container">
+
+        <div class="row g-4">
+
+            {% for country in countries %}
+
+                <div class="col-md-6 col-xl-4">
+
+                    <a
+                        href="{% url 'public_state' country.id %}"
+                        class="country-card"
+                    >
+
+                        <div class="country-card-top">
+
+                            <span class="country-code">
+                                {{ country.name|slice:":2"|upper }}
+                            </span>
+
+                            <span class="access-indicator">
+                                ACCESS
+                                <i class="bi bi-arrow-up-right"></i>
+                            </span>
+
+                        </div>
+
+                        <div class="country-card-body">
+
+                            <div class="country-symbol">
+                                {{ country.name|slice:":1"|upper }}
+                            </div>
+
+                            <h2>
+                                {{ country.name }}
+                            </h2>
+
+                            <p>
+                                {% if country.description %}
+                                    {{ country.description|truncatewords:18 }}
+                                {% else %}
+                                    Registered national political system.
+                                {% endif %}
+                            </p>
+
+                        </div>
+
+                        <div class="country-card-footer">
+
+                            <span>
+                                PUBLIC INTERFACE
+                            </span>
+
+                            <i class="bi bi-chevron-right"></i>
+
+                        </div>
+
+                    </a>
+
+                </div>
+
+            {% empty %}
+
+                <div class="col-12">
+                    <div class="empty-state">
+
+                        <h2>No states registered</h2>
+
+                        <p>
+                            Add Singapore, United States, United Kingdom,
+                            Russia and China through the Django admin.
+                        </p>
+
+                    </div>
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}
