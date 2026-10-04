@@ -3,33 +3,26 @@ from django.shortcuts import get_object_or_404, render
 from .models import Country, InfluenceConnection, Institution
 
 
-def repair_singapore_placeholder(country):
+def normalize_singapore_policy(country):
     """
-    Replace the old Singapore test record with a real policy example.
-    This runs only when the placeholder still exists, so it is safe on redeploys
-    that restore the repository's SQLite database.
+    Keep Singapore comparable with the other country cases by using one
+    canonical policy pathway only: the Platform Workers Act 2024.
+    The function is idempotent and also cleans older placeholder/duplicate
+    Singapore records that may still exist in the deployed SQLite database.
     """
     if country.name != "Singapore":
         return
 
-    placeholder = country.policies.filter(title="HHFJHB$Ff").first()
-    if placeholder is None:
-        return
-
-    decision = country.institutions.filter(
+    decision, _ = Institution.objects.update_or_create(
+        country=country,
         name="Parliament and Central Ministries",
-        layer="decision",
-    ).first()
-
-    if decision is None:
-        decision = Institution.objects.create(
-            country=country,
-            name="Parliament and Central Ministries",
-            layer="decision",
-            description="Institutions responsible for authorising national policy.",
-            authority=90,
-            capacity=95,
-        )
+        defaults={
+            "layer": "decision",
+            "description": "Institutions responsible for authorising national policy.",
+            "authority": 90,
+            "capacity": 95,
+        },
+    )
 
     influence, _ = Institution.objects.update_or_create(
         country=country,
@@ -59,36 +52,42 @@ def repair_singapore_placeholder(country):
         },
     )
 
-    placeholder.title = "Platform Workers Act 2024"
-    placeholder.public_description = (
-        "Legislation strengthening protections for platform workers through "
-        "work injury compensation, CPF contributions, and representation rights."
+    platform_policy, _ = country.policies.update_or_create(
+        title="Platform Workers Act 2024",
+        defaults={
+            "public_description": (
+                "Legislation strengthening protections for platform workers through "
+                "work injury compensation, CPF contributions, and representation rights."
+            ),
+            "status": "implemented",
+            "decision_institution": decision,
+            "implementation_institution": implementation,
+        },
     )
-    placeholder.status = "implemented"
-    placeholder.decision_institution = decision
-    placeholder.implementation_institution = implementation
-    placeholder.save()
 
-    placeholder.influences.all().delete()
-    InfluenceConnection.objects.create(
+    # Remove the former placeholder and the older second Singapore policy so that
+    # Singapore has one policy case, matching the structure of the other countries.
+    country.policies.exclude(pk=platform_policy.pk).delete()
+
+    # Keep one influence relationship for the canonical Singapore policy.
+    platform_policy.influences.exclude(actor=influence).delete()
+    InfluenceConnection.objects.update_or_create(
         actor=influence,
-        policy=placeholder,
-        influence_type="Tripartite recommendations",
-        influence_strength=75,
-        explanation=(
-            "Recommendations from the Advisory Committee on Platform Workers "
-            "informed the protections later implemented through the Act."
-        ),
+        policy=platform_policy,
+        defaults={
+            "influence_type": "Tripartite recommendations",
+            "influence_strength": 75,
+            "explanation": (
+                "Recommendations from the Advisory Committee on Platform Workers "
+                "informed the protections later implemented through the Act."
+            ),
+        },
     )
 
-    old_minister = country.institutions.filter(name="Minister").first()
-    if old_minister is not None:
-        if (
-            not old_minister.authorized_policies.exists()
-            and not old_minister.implemented_policies.exists()
-            and not old_minister.influence_connections.exists()
-        ):
-            old_minister.delete()
+    # Remove old Singapore-only institutions that belonged to the placeholder,
+    # TraceTogether case, or earlier duplicated variants.
+    keep_institutions = [decision.pk, influence.pk, implementation.pk]
+    country.institutions.exclude(pk__in=keep_institutions).delete()
 
 
 def index(request):
@@ -105,7 +104,7 @@ def index(request):
 
 def public_state(request, country_id):
     country = get_object_or_404(Country, id=country_id)
-    repair_singapore_placeholder(country)
+    normalize_singapore_policy(country)
 
     visible_institutions = country.institutions.filter(
         layer="decision",
@@ -134,7 +133,7 @@ def public_state(request, country_id):
 
 def system_view(request, country_id):
     country = get_object_or_404(Country, id=country_id)
-    repair_singapore_placeholder(country)
+    normalize_singapore_policy(country)
 
     decision_institutions = country.institutions.filter(
         layer="decision"
