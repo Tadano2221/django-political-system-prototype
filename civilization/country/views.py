@@ -60,6 +60,7 @@ def system_view(request, country_id):
 
     policies = (
         country.policies
+        .exclude(title="HHFJHB$Ff")
         .select_related(
             "decision_institution",
             "implementation_institution",
