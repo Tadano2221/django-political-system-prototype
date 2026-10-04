@@ -238,6 +238,58 @@ class Command(BaseCommand):
             },
         )
 
+        platform_influence = self.create_institution(
+            country,
+            "Advisory Committee on Platform Workers",
+            "influence",
+            (
+                "A tripartite advisory committee whose recommendations informed "
+                "stronger protections for platform workers."
+            ),
+            45,
+            80,
+        )
+
+        platform_implementation = self.create_institution(
+            country,
+            "Ministry of Manpower and CPF Board",
+            "implementation",
+            (
+                "Public institutions responsible for administering platform-worker "
+                "protections and CPF contribution requirements."
+            ),
+            80,
+            95,
+        )
+
+        platform_policy, _ = Policy.objects.update_or_create(
+            country=country,
+            title="Platform Workers Act 2024",
+            defaults={
+                "public_description": (
+                    "Legislation strengthening protections for platform workers "
+                    "through work injury compensation, CPF contributions, and "
+                    "representation rights."
+                ),
+                "status": "implemented",
+                "decision_institution": decision,
+                "implementation_institution": platform_implementation,
+            },
+        )
+
+        InfluenceConnection.objects.update_or_create(
+            actor=platform_influence,
+            policy=platform_policy,
+            defaults={
+                "influence_type": "Tripartite recommendations",
+                "influence_strength": 75,
+                "explanation": (
+                    "Recommendations from the Advisory Committee on Platform Workers "
+                    "informed the protections later implemented through the Act."
+                ),
+            },
+        )
+
     def seed_china(self):
         country, _ = Country.objects.update_or_create(
             name="China",
