@@ -195,51 +195,6 @@ class Command(BaseCommand):
 
         influence = self.create_institution(
             country,
-            "Public and Expert Consultation Networks",
-            "influence",
-            "Citizens, specialists, and advisory bodies shaping policy feedback.",
-            45,
-            80,
-        )
-
-        implementation = self.create_institution(
-            country,
-            "GovTech and MDDI",
-            "implementation",
-            "Public institutions responsible for digital policy implementation.",
-            80,
-            95,
-        )
-
-        policy, _ = Policy.objects.update_or_create(
-            country=country,
-            title="TraceTogether Data Access Restrictions",
-            defaults={
-                "public_description": (
-                    "Legislation restricting law-enforcement access to "
-                    "digital contact-tracing information."
-                ),
-                "status": "implemented",
-                "decision_institution": decision,
-                "implementation_institution": implementation,
-            },
-        )
-
-        InfluenceConnection.objects.update_or_create(
-            actor=influence,
-            policy=policy,
-            defaults={
-                "influence_type": "Public feedback",
-                "influence_strength": 70,
-                "explanation": (
-                    "Public concern regarding data access contributed "
-                    "to legislative restrictions."
-                ),
-            },
-        )
-
-        platform_influence = self.create_institution(
-            country,
             "Advisory Committee on Platform Workers",
             "influence",
             (
@@ -250,7 +205,7 @@ class Command(BaseCommand):
             80,
         )
 
-        platform_implementation = self.create_institution(
+        implementation = self.create_institution(
             country,
             "Ministry of Manpower and CPF Board",
             "implementation",
@@ -262,7 +217,7 @@ class Command(BaseCommand):
             95,
         )
 
-        platform_policy, _ = Policy.objects.update_or_create(
+        policy, _ = Policy.objects.update_or_create(
             country=country,
             title="Platform Workers Act 2024",
             defaults={
@@ -273,13 +228,13 @@ class Command(BaseCommand):
                 ),
                 "status": "implemented",
                 "decision_institution": decision,
-                "implementation_institution": platform_implementation,
+                "implementation_institution": implementation,
             },
         )
 
         InfluenceConnection.objects.update_or_create(
-            actor=platform_influence,
-            policy=platform_policy,
+            actor=influence,
+            policy=policy,
             defaults={
                 "influence_type": "Tripartite recommendations",
                 "influence_strength": 75,
@@ -289,6 +244,13 @@ class Command(BaseCommand):
                 ),
             },
         )
+
+        # Remove older Singapore placeholder/duplicate records when reseeding.
+        country.policies.exclude(pk=policy.pk).delete()
+        policy.influences.exclude(actor=influence).delete()
+        country.institutions.exclude(
+            pk__in=[decision.pk, influence.pk, implementation.pk]
+        ).delete()
 
     def seed_china(self):
         country, _ = Country.objects.update_or_create(
